@@ -100,7 +100,6 @@ async def test_authenticate_with_profile_field_filtering(
     mock_get_profile.return_value = {
         "name": "Test User",
         "prn": "PES12345",
-        "email": "test@example.com",
         "branch": "Computer Science",
         "campus": "RR",
     }
@@ -108,7 +107,6 @@ async def test_authenticate_with_profile_field_filtering(
     assert result["status"] is True
     assert "profile" in result
     assert "name" in result["profile"]
-    assert "email" in result["profile"]
     assert "prn" not in result["profile"]
     assert "branch" not in result["profile"]
     assert "campus" not in result["profile"]
@@ -283,8 +281,6 @@ async def test_get_profile_information_unknown_campus_code(
         assert profile["prn"] == "PES3XXXXX"
         assert profile["name"] == "Test User"
         assert profile["branch"] == "Computer Science and Engineering"
-        assert profile["email"] == "test@example.com"
-        assert profile["phone"] == "1234567890"
         assert any(
             "Unknown campus code: 3 parsed from PRN=PES3XXXXX for user=testuser" in record.message
             for record in caplog.records
@@ -485,7 +481,5 @@ def test_default_fields_is_list():
     assert "branch" in PESUAcademy.DEFAULT_FIELDS
     assert "semester" in PESUAcademy.DEFAULT_FIELDS
     assert "section" in PESUAcademy.DEFAULT_FIELDS
-    assert "email" in PESUAcademy.DEFAULT_FIELDS
-    assert "phone" in PESUAcademy.DEFAULT_FIELDS
     assert "campus_code" in PESUAcademy.DEFAULT_FIELDS
     assert "campus" in PESUAcademy.DEFAULT_FIELDS

@@ -93,8 +93,8 @@ def test_validate_fields_multiple_invalid_fields():
 
 
 def test_validate_fields_valid_fields():
-    model = RequestModel(username="testuser", password="testpass", fields=["name", "email"])
-    assert model.fields == ["name", "email"]
+    model = RequestModel(username="testuser", password="testpass", fields=["name"])
+    assert model.fields == ["name"]
 
 
 def test_validate_fields_none():

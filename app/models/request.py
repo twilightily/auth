@@ -37,7 +37,7 @@ class RequestModel(BaseModel):
         None,
         title="Profile Fields",
         description="List of profile fields to fetch. If omitted, all default fields will be returned.",
-        json_schema_extra={"example": ["name", "email", "campus", "branch", "semester"]},
+        json_schema_extra={"example": ["name", "campus", "branch", "semester"]},
     )
 
     @field_validator("username")

@@ -125,8 +125,6 @@ async def test_authenticate_with_all_profile_fields(pesu_academy: PESUAcademy):
         "branch",
         "semester",
         "section",
-        "email",
-        "phone",
         "campus_code",
         "campus",
     ]
@@ -148,8 +146,8 @@ async def test_authenticate_with_all_profile_fields(pesu_academy: PESUAcademy):
     assert profile["branch"] == branch
     assert profile["semester"] == semester
     assert profile["section"] == section
-    assert profile["email"] == email
-    assert profile["phone"] == phone
+    #assert profile["email"] == email
+    #assert profile["phone"] == phone
     assert profile["campus_code"] == campus_code
     assert profile["campus"] == campus
 

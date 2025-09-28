@@ -52,18 +52,6 @@ class ProfileModel(BaseModel):
         description="Section the user belongs to.",
         json_schema_extra={"example": "C"},
     )
-    email: str | None = Field(
-        None,
-        title="Email",
-        description="Email address registered with PESU.",
-        json_schema_extra={"example": "johndoe@gmail.com"},
-    )
-    phone: str | None = Field(
-        None,
-        title="Phone Number",
-        description="Phone number registered with PESU.",
-        json_schema_extra={"example": "1234567890"},
-    )
     campus_code: Literal[1, 2] | None = Field(
         None,
         title="Campus Code",

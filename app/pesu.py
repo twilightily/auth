@@ -42,8 +42,6 @@ class PESUAcademy:
         "branch",
         "semester",
         "section",
-        "email",
-        "phone",
         "campus_code",
         "campus",
     ]
@@ -122,7 +120,7 @@ class PESUAcademy:
         # Return a dedicated client/token for this request
         return client_to_use, token_to_use
 
-    def _extract_and_update_profile(self, node: Node, idx: int, profile: dict) -> None:
+    async def _extract_and_update_profile(self, node: Node, idx: int, profile: dict) -> None:
         """Extract the profile data from a node and update the profile dictionary.
 
         Args:
@@ -217,22 +215,9 @@ class PESUAcademy:
         # Extract the profile information from the profile page
         profile: dict[str, Any] = {}
         for i in range(7):
-            self._extract_and_update_profile(details_nodes[i], i, profile)
+            await self._extract_and_update_profile(details_nodes[i], i, profile)
 
         # Get the email and phone number from the profile page
-        if (
-            (email_node := soup.css_first("#updateMail"))
-            and (email_value := email_node.attributes.get("value"))
-            and isinstance(email_value, str)
-        ):
-            profile["email"] = email_value.strip()
-
-        if (
-            (phone_node := soup.css_first("#updateContact"))
-            and (phone_value := phone_node.attributes.get("value"))
-            and isinstance(phone_value, str)
-        ):
-            profile["phone"] = phone_value.strip()
 
         # If username starts with PES1, then they are from RR campus, else if it is PES2, then EC campus
         if profile.get("prn") and (campus_code_match := re.match(r"PES(\d)", profile["prn"])):
